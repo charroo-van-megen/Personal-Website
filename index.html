@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title data-i18n="page_home_title">Home</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Modal styles -->
+  <style>
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      font-family: 'Merriweather', serif;
+    }
+
+    .modal-buttons {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .modal-buttons button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .confirm {
+      background-color: #2196F3;
+      color: #fff;
+    }
+
+    .cancel {
+      background-color: #ccc;
+      color: #222;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+
+  <nav class="navbar">
+
+    <div class="logo">
+      <a href="index.html">Charroo van Megen</a>
+    </div>
+
+    <div class="nav-links">
+
+      <a href="index.html" class="modal-link" data-title="Home">
+        Home
+      </a>
+
+      <a href="projects.html" class="modal-link" data-title="Projects">
+        Projects
+      </a>
+
+      <a href="about.html" class="modal-link" data-title="About Me">
+        About Me
+      </a>
+
+      <!-- PERSONAL PAGE LINK -->
+      <a href="Personal.html" class="modal-link" data-title="Hobbies & Writing">
+        Hobbies
+      </a>
+
+      <a href="contact.html" class="modal-link" data-title="Contact">
+        Contact
+      </a>
+
+      <select id="languageSelect">
+        <option value="nl">NL</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+      </select>
+
+    </div>
+
+  </nav>
+
+</header>
+
+
+<div class="container">
+
+  <!-- INTRO -->
+
+  <section class="home-intro">
+
+    <h1>
+      Welcome to My Website
+    </h1>
+
+    <p>
+      On this website, I showcase my work as a Game Developer,
+      my skills, and my passion for gameplay design.
+    </p>
+
+  </section>
+
+
+  <!-- ABOUT SECTION -->
+
+  <section class="home-about">
+
+    <h2>
+      About Me
+    </h2>
+
+    <p>
+      Hi, I’m Charroo van Megen, a 20-year-old
+      Game Developer student at Mediacollege Amsterdam.
+
+      I specialize in gameplay design using Unity and C#.
+      I focus on creating intuitive and engaging player experiences
+      and continuously improve through projects and experimentation.
+    </p>
+
+  </section>
+
+
+  <!-- HOME CARDS -->
+
+  <section class="home-sections">
+
+    <!-- ABOUT -->
+
+    <div class="home-card">
+
+      <h2>
+        About Me
+      </h2>
+
+      <p>
+        Learn more about who I am and my journey as a developer.
+      </p>
+
+      <a
+        href="about.html"
+        class="modal-link"
+        data-title="About Me">
+
+        Read more →
+
+      </a>
+
+    </div>
+
+
+    <!-- PROJECTS -->
+
+    <div class="home-card">
+
+      <h2>
+        Projects
+      </h2>
+
+      <p>
+        Explore my gameplay prototypes and development work.
+      </p>
+
+      <a
+        href="projects.html"
+        class="modal-link"
+        data-title="Projects">
+
+        View projects →
+
+      </a>
+
+    </div>
+
+
+    <!-- PERSONAL / HOBBIES -->
+
+    <div class="home-card">
+
+      <h2>
+        Hobbies & Writing
+      </h2>
+
+      <p>
+        Discover my creative hobbies, personal interests,
+        and the novels I write outside of game development.
+      </p>
+
+      <a
+        href="Personal.html"
+        class="modal-link"
+        data-title="Hobbies & Writing">
+
+        Explore hobbies →
+
+      </a>
+
+    </div>
+
+
+    <!-- CONTACT -->
+
+    <div class="home-card">
+
+      <h2>
+        Contact
+      </h2>
+
+      <p>
+        Get in touch for collaboration or questions.
+      </p>
+
+      <a
+        href="contact.html"
+        class="modal-link"
+        data-title="Contact">
+
+        Get in touch →
+
+      </a>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div id="confirmModal" class="modal">
+
+  <div class="modal-content">
+
+    <p id="modal-text">
+      Do you wish to go to this page?
+    </p>
+
+    <div class="modal-buttons">
+
+      <button class="confirm">
+        Yes
+      </button>
+
+      <button class="cancel">
+        No
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<footer>
+
+  <p>
+    © 2026 Charroo van Megen
+  </p>
+
+</footer>
+
+
+<script>
+
+const modal = document.getElementById('confirmModal');
+
+const modalText = document.getElementById('modal-text');
+
+const confirmBtn = document.querySelector('.confirm');
+
+const cancelBtn = document.querySelector('.cancel');
+
+let targetUrl = '';
+
+document.querySelectorAll('.modal-link').forEach(link => {
+
+  link.addEventListener('click', function(e) {
+
+    e.preventDefault();
+
+    targetUrl = this.href;
+
+    modalText.textContent =
+      `Do you wish to go to ${this.dataset.title}?`;
+
+    modal.style.display = 'flex';
+
+  });
+
+});
+
+
+confirmBtn.onclick = () => {
+
+  if (targetUrl) {
+
+    window.location.href = targetUrl;
+
+  }
+
+};
+
+
+cancelBtn.onclick = () => {
+
+  modal.style.display = 'none';
+
+  targetUrl = '';
+
+};
+
+
+window.onclick = (e) => {
+
+  if (e.target === modal) {
+
+    modal.style.display = 'none';
+
+  }
+
+};
+
+</script>
+
+</body>
+</html>
