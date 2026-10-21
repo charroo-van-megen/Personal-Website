@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Hobbies & Personal</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    .hobby-header {
+      margin-bottom: 2rem;
+    }
+
+    .hobby-intro {
+      font-size: 1.1rem;
+      max-width: 750px;
+    }
+
+    .personal-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      border-top: 5px solid var(--azure);
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .hobby-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .hobby-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 5px solid var(--mango);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: 0.3s ease;
+    }
+
+    .hobby-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+    }
+
+    .collapsible {
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 0.5rem;
+    }
+
+    .collapsible-content {
+      display: none;
+      margin-top: 1rem;
+    }
+
+    /* =========================
+       NOVEL SECTION
+    ========================= */
+
+    .novel-section {
+      margin-top: 3rem;
+    }
+
+    .novel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .novel-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      transition: 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .novel-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+
+    .novel-card img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+    }
+
+    .novel-content {
+      padding: 1.5rem;
+      flex: 1;
+    }
+
+    .novel-content h2 {
+      margin-bottom: 0.7rem;
+    }
+
+    .novel-content p {
+      margin-bottom: 1rem;
+    }
+
+    .novel-button {
+      display: inline-block;
+      padding: 0.7rem 1.2rem;
+      background: var(--azure);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .novel-button:hover {
+      background: var(--mango);
+      color: white;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+
+  <nav class="navbar">
+
+    <div class="logo">
+      <a href="index.html">Charroo van Megen</a>
+    </div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About Me</a>
+      <a href="hobbies.html">Hobbies</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+  </nav>
+
+</header>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <section class="hobby-header">
+
+    <h1>Hobbies & Personal Interests</h1>
+
+    <p class="hobby-intro">
+      Outside of game development, I enjoy creative hobbies that help me improve
+      storytelling, imagination, and player experience design.
+      These interests strongly influence both my writing and gameplay philosophy.
+    </p>
+
+  </section>
+
+  <!-- PERSONAL SECTION -->
+  <section class="personal-section">
+
+    <h2>Personal Information</h2>
+
+    <p>
+      I enjoy creativity, discipline, storytelling, and immersive experiences.
+      Outside of game development, I spend time writing novels,
+      reading fantasy and mythology, analyzing games,
+      exercising, and experimenting with creative ideas.
+    </p>
+
+    <p>
+      These hobbies help improve my understanding of atmosphere,
+      interaction, pacing, world-building, and emotional engagement.
+    </p>
+
+  </section>
+
+  <!-- HOBBY GRID -->
+  <section class="hobby-grid">
+
+    <!-- WRITING -->
+    <div class="hobby-card">
+
+      <h2 class="collapsible">Creative Writing</h2>
+
+      <div class="collapsible-content">
+
+        <p>
+          Writing is one of my biggest creative passions outside of game development.
+          I enjoy designing worlds, lore, power systems,
+          and psychologically-driven characters.
+        </p>
+
+        <p>
+          My stories often focus on mystery, progression fantasy,
+          emotional conflict, identity, and immersive storytelling.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- GAMING -->
+    <div class="hobby-card">
+
+      <h2 class="collapsible">Gaming & Analysis</h2>
+
+      <div class="collapsible-content">
+
+        <p>
+          I enjoy analyzing gameplay systems, movement mechanics,
+          progression systems, pacing, and player immersion.
+        </p>
+
+        <p>
+          Understanding what makes games satisfying helps improve
+          my own gameplay design philosophy.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- READING -->
+    <div class="hobby-card">
+
+      <h2 class="collapsible">Reading</h2>
+
+      <div class="collapsible-content">
+
+        <p>
+          I enjoy reading fantasy, mythology,
+          psychology, and game design related material.
+          Reading helps improve creativity and storytelling depth.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- SPORTS -->
+    <div class="hobby-card">
+
+      <h2 class="collapsible">Sports & Discipline</h2>
+
+      <div class="collapsible-content">
+
+        <p>
+          Sports help me maintain consistency,
+          discipline, and focus — qualities important
+          for long-term creative projects and teamwork.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- NOVEL SECTION -->
+  <section class="novel-section">
+
+    <h1>My Novels</h1>
+
+    <div class="novel-grid">
+
+      <!-- UNMADE -->
+      <div class="novel-card">
+
+        <img 
+          src="unmade-cover.jpg" 
+          alt="Unmade Cover">
+
+        <div class="novel-content">
+
+          <h2>Unmade</h2>
+
+          <p>
+            A progression fantasy story centered around memory loss,
+            supernatural trials, psychological conflict,
+            and the search for identity.
+          </p>
+
+          <a 
+            href="https://www.royalroad.com/fiction/140196/unmade"
+            target="_blank"
+            class="novel-button">
+
+            Read Unmade →
+
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- FAILED HERO -->
+      <div class="novel-card">
+
+        <img 
+          src="failed-hero-cover.jpg" 
+          alt="A Failed Hero's Voyage Cover">
+
+        <div class="novel-content">
+
+          <h2>A Failed Hero's Voyage</h2>
+
+          <p>
+            A fantasy story exploring failure,
+            expectations, emotional struggle,
+            and the burden placed upon a hero.
+          </p>
+
+          <a 
+            href="https://demo.novelpedia.net/novels/a-failed-heros-voyage-239250"
+            target="_blank"
+            class="novel-button">
+
+            Read A Failed Hero's Voyage →
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+<footer>
+  <p>© 2026 Charroo van Megen</p>
+</footer>
+
+<script>
+
+  const collapsibles = document.querySelectorAll('.collapsible');
+
+  collapsibles.forEach(item => {
+
+    item.addEventListener('click', () => {
+
+      const content = item.nextElementSibling;
+
+      if(content.style.display === 'block') {
+        content.style.display = 'none';
+      }
+      else {
+        content.style.display = 'block';
+      }
+
+    });
+
+  });
+
+</script>
+
+</body>
+</html>
