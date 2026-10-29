@@ -13,58 +13,6 @@
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Modal styles -->
-  <style>
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background-color: #fff;
-      padding: 2rem;
-      border-radius: 8px;
-      max-width: 400px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      font-family: 'Merriweather', serif;
-    }
-
-    .modal-buttons {
-      margin-top: 1.5rem;
-      display: flex;
-      justify-content: space-around;
-    }
-
-    .modal-buttons button {
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .confirm {
-      background-color: #2196F3;
-      color: #fff;
-    }
-
-    .cancel {
-      background-color: #ccc;
-      color: #222;
-    }
-
-  </style>
-
 </head>
 
 <body>
@@ -79,24 +27,24 @@
 
     <div class="nav-links">
 
-      <a href="index.html" class="modal-link" data-title="Home" aria-current="page">
+      <a href="index.html" aria-current="page">
         Home
       </a>
 
-      <a href="projects.html" class="modal-link" data-title="Projects">
+      <a href="projects.html">
         Projects
       </a>
 
-      <a href="about.html" class="modal-link" data-title="About Me">
+      <a href="about.html">
         About Me
       </a>
 
       <!-- PERSONAL PAGE LINK -->
-      <a href="Personal.html" class="modal-link" data-title="Hobbies & Writing">
+      <a href="Personal.html">
         Hobbies
       </a>
 
-      <a href="contact.html" class="modal-link" data-title="Contact">
+      <a href="contact.html">
         Contact
       </a>
 
@@ -119,14 +67,21 @@
 
   <section class="home-intro">
 
-    <h1>
-      Welcome to My Website
-    </h1>
+    <div class="home-intro-text">
+      <h1>
+        Welcome to My Website
+      </h1>
 
-    <p>
-      On this website, I showcase my work as a Game Developer,
-      my skills, and my passion for gameplay design.
-    </p>
+      <p>
+        On this website, I showcase my work as a Game Developer,
+        my skills, and my passion for gameplay design.
+      </p>
+    </div>
+
+    <img
+      class="home-profile-image"
+      src="IMG_3544.jpg"
+      alt="Portrait of Charroo van Megen">
 
   </section>
 
@@ -140,7 +95,7 @@
     </h2>
 
     <p>
-      Hi, I’m Charroo van Megen, a 20-year-old
+      Hi, I’m Charroo van Megen, a 21-year-old
       Game Developer student at Mediacollege Amsterdam.
 
       I specialize in gameplay design using Unity and C#.
@@ -167,10 +122,7 @@
         Learn more about who I am and my journey as a developer.
       </p>
 
-      <a
-        href="about.html"
-        class="modal-link"
-        data-title="About Me">
+      <a href="about.html">
 
         Read more →
 
@@ -191,10 +143,7 @@
         Explore my gameplay prototypes and development work.
       </p>
 
-      <a
-        href="projects.html"
-        class="modal-link"
-        data-title="Projects">
+      <a href="projects.html">
 
         View projects →
 
@@ -216,10 +165,7 @@
         and the novels I write outside of game development.
       </p>
 
-      <a
-        href="Personal.html"
-        class="modal-link"
-        data-title="Hobbies & Writing">
+      <a href="Personal.html">
 
         Explore hobbies →
 
@@ -240,10 +186,7 @@
         Get in touch for collaboration or questions.
       </p>
 
-      <a
-        href="contact.html"
-        class="modal-link"
-        data-title="Contact">
+      <a href="contact.html">
 
         Get in touch →
 
@@ -256,33 +199,6 @@
 </div>
 
 
-<!-- MODAL -->
-
-<div id="confirmModal" class="modal">
-
-  <div class="modal-content">
-
-    <p id="modal-text">
-      Do you wish to go to this page?
-    </p>
-
-    <div class="modal-buttons">
-
-      <button class="confirm">
-        Yes
-      </button>
-
-      <button class="cancel">
-        No
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
 <footer>
 
   <p>
@@ -291,68 +207,6 @@
 
 </footer>
 
-
-<script>
-
-const modal = document.getElementById('confirmModal');
-
-const modalText = document.getElementById('modal-text');
-
-const confirmBtn = document.querySelector('.confirm');
-
-const cancelBtn = document.querySelector('.cancel');
-
-let targetUrl = '';
-
-document.querySelectorAll('.modal-link').forEach(link => {
-
-  link.addEventListener('click', function(e) {
-
-    e.preventDefault();
-
-    targetUrl = this.href;
-
-    modalText.textContent =
-      `Do you wish to go to ${this.dataset.title}?`;
-
-    modal.style.display = 'flex';
-
-  });
-
-});
-
-
-confirmBtn.onclick = () => {
-
-  if (targetUrl) {
-
-    window.location.href = targetUrl;
-
-  }
-
-};
-
-
-cancelBtn.onclick = () => {
-
-  modal.style.display = 'none';
-
-  targetUrl = '';
-
-};
-
-
-window.onclick = (e) => {
-
-  if (e.target === modal) {
-
-    modal.style.display = 'none';
-
-  }
-
-};
-
-</script>
 
 </body>
 </html>
