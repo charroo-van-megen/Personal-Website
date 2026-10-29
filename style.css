@@ -30,7 +30,7 @@ html {
 
 body {
   font-family: 'Playfair Display', serif;
-  background: url('Quartz.Background.jpg') no-repeat center center fixed;
+  background: url('Images/Quartz.Background.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #222;
   line-height: 1.7;
