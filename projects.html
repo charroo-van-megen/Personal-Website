@@ -9,11 +9,367 @@
 
   <style>
 
+    .project-heading {
+      margin-bottom: 0.75rem;
+    }
+
+    .project-toggle {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+      width: 100%;
+      border: 0;
+      background: none;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .project-toggle:focus-visible {
+      outline: 3px solid #2196F3;
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    .project-toggle-icon {
+      flex: 0 0 auto;
+      font-family: Arial, sans-serif;
+      font-size: 1.5rem;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+
+    .project-toggle[aria-expanded="true"] .project-toggle-icon {
+      transform: rotate(45deg);
+    }
+
+    .project-video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 4px;
+      background: #111;
+      object-fit: cover;
+    }
+
+    img.project-video {
+      object-fit: contain;
+    }
+
+    .project-details {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    .project-details[hidden] {
+      display: none;
+    }
+
+    body.project-open {
+      overflow: hidden;
+    }
+
+    body.project-open::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.75);
+    }
+
+    .project-card.is-open,
+    .project-card.is-open:hover {
+      position: fixed;
+      z-index: 1001;
+      top: 50%;
+      left: 50%;
+      width: min(1400px, calc(100vw - 2rem));
+      max-height: calc(100vh - 2rem);
+      overflow-y: auto;
+      transform: translate(-50%, -50%);
+      padding: 2rem;
+      border-top-width: 6px;
+    }
+
+    .project-card.is-open .project-toggle-icon {
+      display: none;
+    }
+
+    .project-close {
+      display: none;
+    }
+
+    .project-card.is-open .project-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1;
+      display: block;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin: 0;
+      border: 0;
+      border-radius: 50%;
+      background: #222;
+      color: #fff;
+      font: 1.75rem/1 Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    .project-card.is-open .project-close:hover {
+      background: var(--azure);
+    }
+
+    .project-card.is-open .project-video {
+      max-height: 65vh;
+    }
+
+    .project-section-title {
+      margin-bottom: 1rem;
+      color: var(--dark);
+      font: 700 1.25rem 'Merriweather', serif;
+    }
+
+    .project-overview {
+      align-self: center;
+      padding: 1rem 0;
+    }
+
+    .project-overview p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .project-overview-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    .project-overview-links a {
+      display: inline-block;
+      padding: 0.65rem 0.9rem;
+      border-radius: 4px;
+      background: #f2f5f8;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .project-overview-links a:hover {
+      background: #e5eef7;
+    }
+
+    .project-media-section,
+    .project-code-section {
+      padding-top: 1.5rem;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    .project-image-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 0;
+    }
+
+    .project-image-gallery figure {
+      min-width: 0;
+      padding: 0.75rem;
+      overflow: hidden;
+      border: 1px solid #e5e5e5;
+      border-radius: 6px;
+      background: #fafafa;
+    }
+
+    .project-image-gallery img {
+      display: block;
+      width: 100%;
+      max-height: 360px;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      border-radius: 4px;
+      background: #111;
+      cursor: zoom-in;
+    }
+
+    .project-image-gallery img:focus-visible {
+      outline: 3px solid var(--azure);
+      outline-offset: 3px;
+    }
+
+    .project-image-gallery video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 4px;
+      background: #111;
+    }
+
+    .project-code-gallery {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .project-code-gallery img {
+      aspect-ratio: auto;
+      background: #171717;
+    }
+
+    .project-card.is-open .project-image-gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-image-gallery figcaption {
+      margin-top: 0.5rem;
+      color: #444;
+      font: 0.95rem/1.5 Arial, sans-serif;
+    }
+
+    .gallery-help {
+      margin: -0.5rem 0 1rem;
+      color: #555;
+      font: 0.95rem/1.5 Arial, sans-serif;
+    }
+
+    .image-viewer {
+      width: min(1200px, calc(100vw - 2rem));
+      max-width: none;
+      max-height: calc(100vh - 2rem);
+      margin: auto;
+      padding: 1.25rem;
+      overflow: auto;
+      border: 0;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .image-viewer::backdrop {
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+    .image-viewer img {
+      display: block;
+      width: 100%;
+      max-height: calc(100vh - 9rem);
+      margin: 0 auto;
+      object-fit: contain;
+      background: #171717;
+    }
+
+    .image-viewer figcaption {
+      margin-top: 0.75rem;
+      color: #333;
+      font: 1rem/1.6 Arial, sans-serif;
+    }
+
+    .image-viewer-close {
+      display: block;
+      margin: 0 0 0.75rem auto;
+      padding: 0.5rem 0.85rem;
+      border: 0;
+      border-radius: 4px;
+      background: var(--dark);
+      color: #fff;
+      font: 700 1rem Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    .image-viewer-close:hover {
+      background: var(--azure);
+    }
+
+    #vertical-slice-project.is-open {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+      gap: 1.5rem 2rem;
+    }
+
+    #vertical-slice-project.is-open .project-heading,
+    #vertical-slice-project.is-open .project-media-section,
+    #vertical-slice-project.is-open .project-code-section {
+      grid-column: 1 / -1;
+    }
+
+    #vertical-slice-project.is-open .project-heading {
+      margin: 0;
+      padding-right: 3rem;
+      align-self: center;
+    }
+
+    #vertical-slice-project.is-open .project-toggle {
+      color: var(--dark);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+    }
+
+    #vertical-slice-project.is-open > .project-video {
+      grid-column: 1;
+      grid-row: 2;
+      align-self: center;
+      max-height: none;
+    }
+
+    #vertical-slice-project.is-open #vertical-slice-details:not([hidden]) {
+      display: contents;
+    }
+
+    #vertical-slice-project.is-open .project-overview {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    #vertical-slice-project.is-open .project-overview p {
+      color: #444;
+    }
+
+    #vertical-slice-project.is-open .project-code-section {
+      grid-row: 3;
+    }
+
+    #vertical-slice-project.is-open .project-media-section {
+      grid-row: 4;
+    }
+
+    @media (max-width: 600px) {
+      .project-card.is-open,
+      .project-card.is-open:hover {
+        width: calc(100vw - 1rem);
+        max-height: calc(100vh - 1rem);
+        padding: 1.25rem;
+      }
+
+      .project-card.is-open .project-toggle {
+        font-size: 1.2rem;
+      }
+
+      #vertical-slice-project.is-open {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.25rem;
+      }
+
+      #vertical-slice-project.is-open .project-heading,
+      #vertical-slice-project.is-open > .project-video,
+      #vertical-slice-project.is-open .project-overview,
+      #vertical-slice-project.is-open .project-media-section,
+      #vertical-slice-project.is-open .project-code-section {
+        grid-column: 1;
+        grid-row: auto;
+      }
+
+      #vertical-slice-project.is-open .project-image-gallery,
+      #vertical-slice-project.is-open .project-code-gallery {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
     /* Modal styles */
     .modal {
       display: none;
       position: fixed;
-      z-index: 1000;
+      z-index: 1100;
       left: 0;
       top: 0;
       width: 100%;
@@ -77,7 +433,7 @@
         Home
       </a>
 
-      <a href="projects.html" data-i18n="nav_projects">
+      <a href="projects.html" data-i18n="nav_projects" aria-current="page">
         Projects
       </a>
 
@@ -132,169 +488,352 @@
 
     <!-- PROJECT 1 -->
 
-    <div class="home-card">
+    <div class="home-card project-card">
 
-      <h2>
-        Galactic Ricochet
+      <h2 class="project-heading" id="galactic-heading">
+        <button class="project-toggle" type="button" aria-expanded="false" aria-controls="galactic-details">
+          Galactic Ricochet
+          <span class="project-toggle-icon" aria-hidden="true">+</span>
+        </button>
       </h2>
+      <button class="project-close" type="button" aria-label="Close project details">×</button>
 
-      <p>
-        A gameplay-focused project centered around fast-paced mechanics,
-        ricochet interactions, movement systems,
-        and combat experimentation.
-      </p>
+      <img class="project-video" src="Bezig met opnemen 2026-10-29 112503.gif"
+        alt="Animated gameplay preview of Galactic Ricochet" loading="lazy">
 
-      <p>
-        The project focused heavily on responsive controls,
-        gameplay feel, and satisfying combat feedback.
-      </p>
+      <div class="project-details" id="galactic-details" hidden>
+        <p>
+          A gameplay-focused project centered around fast-paced mechanics,
+          ricochet interactions, movement systems,
+          and combat experimentation.
+        </p>
 
-      <video controls width="100%" poster="galactic-poster.jpg">
+        <p>
+          The project focused heavily on responsive controls,
+          gameplay feel, and satisfying combat feedback.
+        </p>
 
-        <source src="galactic-demo.mp4" type="video/mp4">
+        <p>
+          I made the ComboRewardManager and the SuperBallReward systems,
+          focused on reward logic, gameplay feedback,
+          and progression mechanics.
+        </p>
 
-        Your browser does not support the video tag.
+        <section class="project-code-section" aria-labelledby="galactic-code-title">
+          <h3 class="project-section-title" id="galactic-code-title">Code highlights</h3>
+          <p class="gallery-help">These screenshots explain how combo events build reusable reward bags and how the Super Ball reward is activated, timed, and shown to the player. Select an image to view the code larger.</p>
+          <div class="project-image-gallery project-code-gallery" aria-label="Galactic Ricochet combo reward and Super Ball code screenshots">
+            <figure>
+              <img src="Schermafbeelding 2026-10-29 111517.png" alt="ComboRewardManager subscribing to combo achieved, combo lost, and ball lost events" loading="lazy">
+              <figcaption><strong>Listening for combo events.</strong> When enabled, the reward manager subscribes to combo-achieved, combo-lost, and ball-lost events. When disabled, it removes those same handlers so it does not keep receiving events or register duplicates.</figcaption>
+            </figure>
 
-      </video>
+            <figure>
+              <img src="Schermafbeelding 2026-10-29 111536.png" alt="GetOrCreateBag checking for an existing non-empty reward queue before creating a reward list" loading="lazy">
+              <figcaption><strong>Reusing reward bags.</strong> <code>GetOrCreateBag</code> first checks whether a reward queue already exists for the combo level and contains rewards. If so, it returns that queue; otherwise, it starts building a new reward list.</figcaption>
+            </figure>
 
-      <a
-        href="https://github.com/erwinhenraat/Galactic_Ricochet/tree/temp/superball"
-        target="_blank"
-        class="external-link">
+            <figure>
+              <img src="Schermafbeelding 2026-10-29 111544.png" alt="GetOrCreateBag storing a new reward queue, logging its size, and returning it" loading="lazy">
+              <figcaption><strong>Saving a new reward bag.</strong> The reward list is wrapped in a queue and stored under its combo level. A debug message records the level and reward count, then the new queue is returned for use.</figcaption>
+            </figure>
 
-        View on GitHub →
+            <figure>
+              <img src="Schermafbeelding 2026-10-29 111620.png" alt="SuperBallReward fields for effect duration, shared active state, and timer coroutine" loading="lazy">
+              <figcaption><strong>Super Ball reward state.</strong> The duration field controls how long the reward lasts. The static active property lets other systems check whether it is enabled, while the coroutine reference tracks the timer that will end it.</figcaption>
+            </figure>
 
-      </a>
+            <figure>
+              <img src="Schermafbeelding 2026-10-29 111627.png" alt="ActivateReward guarding against reactivation, enabling the Super Ball state, and starting its timer coroutine" loading="lazy">
+              <figcaption><strong>Activating the reward.</strong> The method returns early if the Super Ball is already active. Otherwise it sets the shared active state, logs activation, stops any existing timer, and starts a fresh timer coroutine.</figcaption>
+            </figure>
 
-      <br><br>
+            <figure>
+              <img src="Schermafbeelding 2026-10-29 111633.png" alt="ResetReward disabling the Super Ball state and stopping its timer coroutine" loading="lazy">
+              <figcaption><strong>Resetting the reward.</strong> If the reward is active, this method turns it off, logs the deactivation, and stops its timer coroutine. The guard avoids doing reset work when the reward is already inactive.</figcaption>
+            </figure>
 
-      <a
-        href="https://github.com/erwinhenraat/Galactic_Ricochet/tree/temp/superball/Assets/Scripts/SuperBall"
-        target="_blank"
-        class="external-link">
+            <figure>
+              <img src="Schermafbeelding 2026-10-29 111602.png" alt="SuperBallMarker changing its local scale while the Super Ball reward is active" loading="lazy">
+              <figcaption><strong>Showing reward status.</strong> While the Super Ball is active, the marker grows to 1.3 times its original size. When inactive, it returns to its saved original scale, giving the player a clear visual status cue.</figcaption>
+            </figure>
+          </div>
+        </section>
 
-        View My SuperBall Scripts →
-
-      </a>
-
-      <p>
-        I made the ComboRewardManager and the SuperBallReward systems,
-        focused on reward logic, gameplay feedback,
-        and progression mechanics.
-      </p>
+        <div class="project-overview-links">
+          <a href="https://github.com/erwinhenraat/Galactic_Ricochet/tree/temp/superball"
+            target="_blank" rel="noopener noreferrer" class="external-link">
+            Project repository →
+          </a>
+          <a href="https://github.com/erwinhenraat/Galactic_Ricochet/tree/temp/superball/Assets/Scripts/SuperBall"
+            target="_blank" rel="noopener noreferrer" class="external-link">
+            My scripts →
+          </a>
+        </div>
+      </div>
 
     </div>
 
 
     <!-- PROJECT 2 -->
 
-    <div class="home-card">
+    <div class="home-card project-card" id="vertical-slice-project">
 
-      <h2>
-        Vertical Slice Based on Untitled Goose Game
+      <h2 class="project-heading" id="vertical-slice-heading">
+        <button class="project-toggle" type="button" aria-expanded="false" aria-controls="vertical-slice-details">
+          Vertical Slice Based on Untitled Goose Game
+          <span class="project-toggle-icon" aria-hidden="true">+</span>
+        </button>
       </h2>
+      <button class="project-close" type="button" aria-label="Close project details">×</button>
 
-      <p>
-        A vertical slice where a small but complete gameplay experience
-        was built. Includes interactions, AI behavior,
-        and a clear gameplay loop.
-      </p>
+      <video class="project-video" controls preload="metadata">
 
-      <p>
-        Within this project, I was responsible for creating
-        all gameplay scripts and programming systems used throughout the game.
-        This included gameplay interactions, mechanics,
-        and technical implementation inside Unity using C#.
-      </p>
-
-      <video controls width="100%" poster="vertical-slice-poster.jpg">
-
-        <source src="schermopname 2026-01-28 115509.mp4" type="video/mp4">
+        <source src="0128.mp4" type="video/mp4">
 
         Your browser does not support the video tag.
 
       </video>
 
-      <a
-        href="https://github.com/Shifter447/M6-Vertical_Slice/tree/charroo"
-        target="_blank"
-        class="external-link">
+      <div class="project-details" id="vertical-slice-details" hidden>
+        <section class="project-overview" aria-label="Project overview">
+          <h3 class="project-section-title">Project overview</h3>
+          <p>
+            A vertical slice where a small but complete gameplay experience
+            was built. Includes interactions, AI behavior,
+            and a clear gameplay loop.
+          </p>
 
-        View Project Repository →
+          <p>
+            I created the gameplay scripts and programming systems used
+            throughout the game, including interactions and mechanics
+            implemented in Unity using C#.
+          </p>
 
-      </a>
+          <div class="project-overview-links">
+            <a href="https://github.com/Shifter447/M6-Vertical_Slice/tree/charroo"
+              target="_blank" rel="noopener noreferrer" class="external-link">
+              Project repository →
+            </a>
+            <a href="https://github.com/Shifter447/M6-Vertical_Slice/tree/charroo/Assets/Scripts"
+              target="_blank" rel="noopener noreferrer" class="external-link">
+              My scripts →
+            </a>
+          </div>
+        </section>
 
-      <br><br>
+        <section class="project-code-section" aria-labelledby="vertical-slice-code-title">
+          <h3 class="project-section-title" id="vertical-slice-code-title">Eindpresentatie images</h3>
+          <p class="gallery-help">Select an image to open a larger, clearer view. Press Escape or use the close button to return.</p>
+          <div class="project-image-gallery project-code-gallery" aria-label="Vertical Slice Eindpresentatie images">
+            <figure>
+              <img src="Eindpresentatie_Team8_Bo_verticalSlice.png" alt="Unity Inspector settings for the weight and maximum drag distance of a carried object" loading="eager">
+              <figcaption><strong>Object drag settings.</strong> The weight value controls how heavy a carried object feels, while the maximum drag distance limits how far it can be pulled from the player.</figcaption>
+            </figure>
 
-      <a
-        href="https://github.com/Shifter447/M6-Vertical_Slice/tree/charroo/Assets/Scripts"
-        target="_blank"
-        class="external-link">
+            <figure>
+              <img src="Eindpresentatie_Team8_Bo_verticalSlice (1).png" alt="C sharp Update method that grabs an object when the right mouse button is pressed and releases it when it is let go" loading="eager">
+              <figcaption><strong>Grab and release input.</strong> The update loop starts grabbing while the right mouse button is held and releases the object when the button is let go.</figcaption>
+            </figure>
 
-        View My Scripts →
+            <figure>
+              <img src="Eindpresentatie_Team8_Bo_verticalSlice (2).png" alt="C sharp camera zoom method that reads the mouse wheel and clamps zoom distance between minimum and maximum values" loading="eager">
+              <figcaption><strong>Camera zoom.</strong> Mouse-wheel input changes the camera distance, and a clamp keeps the zoom between its configured minimum and maximum.</figcaption>
+            </figure>
 
-      </a>
+            <figure>
+              <img src="Eindpresentatie_Team8_Bo_verticalSlice (3).png" alt="C sharp input logic that picks up an object if the player is not carrying one, otherwise drops it" loading="eager">
+              <figcaption><strong>Pick up or drop.</strong> A right-click picks up an object when the player is empty-handed; if the player is already carrying something, the same input drops it.</figcaption>
+            </figure>
+          </div>
+
+          <h3 class="project-section-title">Schermafbeeldingen</h3>
+          <p class="gallery-help">These presentation slides pair in-game examples with the code and settings behind each feature. Select a slide to zoom in.</p>
+          <div class="project-image-gallery project-code-gallery" aria-label="Vertical Slice gameplay and code screenshots">
+            <figure>
+              <img src="Schermafbeelding 2026-01-30 124524.png" alt="Presentation slide showing goose gameplay, NavMeshAgent navigation, and player movement speed settings" loading="eager">
+              <figcaption><strong>Player movement and navigation.</strong> The gameplay panels show the goose moving through the level. The code uses a NavMeshAgent for pathfinding and exposes movement speed and run multiplier settings.</figcaption>
+            </figure>
+
+            <figure>
+              <img src="Schermafbeelding 2026-01-30 124607.png" alt="Presentation slide showing object interactions, drag weight, interaction distance, carry point, and grab or release input" loading="eager">
+              <figcaption><strong>Object interactions.</strong> The examples show the player approaching and moving an object. The settings define its drag weight, interaction distance, carry point, and which objects can be interacted with; the input logic handles grabbing and releasing.</figcaption>
+            </figure>
+
+            <figure>
+              <img src="Schermafbeelding 2026-01-30 124634.png" alt="Presentation slide showing a carried object, carrying distance, pickup logic, and audio when an object is carried" loading="eager">
+              <figcaption><strong>Carrying and feedback.</strong> The slide shows how close the player must be to reach an object, how an object is picked up, and how a sound plays when carrying begins.</figcaption>
+            </figure>
+
+            <figure>
+              <img src="Schermafbeelding 2026-01-30 124704.png" alt="Presentation slide showing camera zoom limits, mouse wheel zoom input, and the player-follow camera target" loading="eager">
+              <figcaption><strong>Camera controls.</strong> The zoom limits prevent the camera from getting too close or far away, the mouse wheel changes the zoom, and the follow target keeps the player in view.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="project-media-section" aria-labelledby="vertical-slice-gameplay-title">
+          <h3 class="project-section-title" id="vertical-slice-gameplay-title">Gameplay</h3>
+          <div class="project-image-gallery" aria-label="Vertical Slice gameplay recordings">
+            <figure>
+              <video controls preload="metadata">
+                <source src="Schermopname 2026-01-20 210459.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption>Gameplay recording · January 20</figcaption>
+            </figure>
+
+            <figure>
+              <video controls preload="metadata">
+                <source src="Schermopname 2026-01-20 211010.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption>Gameplay recording · January 20</figcaption>
+            </figure>
+
+            <figure>
+              <video controls preload="metadata">
+                <source src="Schermopname 2026-01-21 092406.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption>Gameplay recording · January 21</figcaption>
+            </figure>
+
+            <figure>
+              <img src="Bezig met opnemen 2026-01-20 210519.gif" alt="Animated gameplay footage from the Vertical Slice project" loading="lazy">
+              <figcaption><strong>Gameplay animation.</strong> A short moving preview of the goose navigating the level and interacting with the environment.</figcaption>
+            </figure>
+
+            <figure>
+              <img src="Bezig met opnemen 2026-01-20 211015.gif" alt="Additional animated gameplay footage from the Vertical Slice project" loading="lazy">
+              <figcaption><strong>More gameplay animation.</strong> Another in-game sequence showing the project in motion, complementing the longer gameplay recordings above.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+      </div>
 
     </div>
 
 
     <!-- PROJECT 3 -->
 
-    <div class="home-card">
+    <div class="home-card project-card">
 
-      <h2>
-        Horror Game
+      <h2 class="project-heading" id="horror-heading">
+        <button class="project-toggle" type="button" aria-expanded="false" aria-controls="horror-details">
+          Horror Game
+          <span class="project-toggle-icon" aria-hidden="true">+</span>
+        </button>
       </h2>
+      <button class="project-close" type="button" aria-label="Close project details">×</button>
 
-      <p>
-        A horror-focused project designed around atmosphere,
-        tension, environmental storytelling,
-        and creating an unsettling player experience.
-      </p>
+      <video class="project-video" controls preload="metadata">
 
-      <p>
-        The focus was on immersion, suspense,
-        environmental design, and psychological tension.
-      </p>
-
-      <video controls width="100%" poster="horror-poster.jpg">
-
-        <source src="horror-demo.mp4" type="video/mp4">
+        <source src="school-horror.mov">
 
         Your browser does not support the video tag.
 
       </video>
 
-      <a
-        href="https://github.com/charroo-van-megen/horror-game-periode-4"
-        target="_blank"
-        class="external-link">
+      <div class="project-details" id="horror-details" hidden>
+        <p>
+          A horror-focused project designed around atmosphere,
+          tension, environmental storytelling,
+          and creating an unsettling player experience.
+        </p>
 
-        View on GitHub →
+        <p>
+          The focus was on immersion, suspense,
+          environmental design, and psychological tension.
+        </p>
 
-      </a>
+        <p>
+          I made the movement system, audio components,
+          and the locker script used throughout the game.
+        </p>
 
-      <br><br>
+        <section class="project-media-section" aria-labelledby="horror-gallery-title">
+          <h3 class="project-section-title" id="horror-gallery-title">Horror game features</h3>
+          <p class="gallery-help">These selected code screenshots show how player movement, hiding, camera control, and interactive audio and lighting work. Select any image to view it larger.</p>
+          <div class="project-image-gallery project-code-gallery" aria-label="Selected Horror Game code screenshots">
+            <figure>
+              <img src="Horror Game/Schermafbeelding 2026-06-22 233540.png" alt="Unity movement settings for walking, sprinting, crouching, and rotation speed" loading="lazy">
+              <figcaption><strong>Movement settings.</strong> Walk, sprint, and crouch speeds are set separately, so each movement state can have its own pace. Rotation speed controls how quickly the player turns.</figcaption>
+            </figure>
 
-      <a
-        href="https://github.com/charroo-van-megen/horror-game-periode-4/tree/main/Assets/Scripts"
-        target="_blank"
-        class="external-link">
+            <figure>
+              <img src="Horror Game/Schermafbeelding 2026-06-22 233741.png" alt="Unity Transform references for the player's hiding position and locker exit position" loading="lazy">
+              <figcaption><strong>Locker positions.</strong> These Transform references mark where the player should move when entering a hiding spot and where they should reappear when leaving it.</figcaption>
+            </figure>
 
-        View My Horror Scripts →
+            <figure>
+              <img src="Horror Game/Schermafbeelding 2026-06-22 233843.png" alt="C sharp locker exit method that restores player position, movement, and visibility" loading="lazy">
+              <figcaption><strong>Leaving a locker.</strong> The exit routine moves the player to the exit point, turns movement back on, and makes the player model visible again.</figcaption>
+            </figure>
 
-      </a>
+            <figure>
+              <img src="Horror Game/Schermafbeelding 2026-06-22 233933.png" alt="Unity player camera settings for mouse sensitivity and vertical rotation" loading="lazy">
+              <figcaption><strong>Camera settings.</strong> Mouse sensitivity controls how responsive looking feels, while the vertical rotation value tracks the camera's up-and-down angle.</figcaption>
+            </figure>
 
-      <p>
-        I made the movement system, audio components,
-        and the locker script used throughout the game.
-      </p>
+            <figure>
+              <img src="Horror Game/Schermafbeelding 2026-06-22 234029.png" alt="C sharp mouse look update that reads mouse input and clamps vertical camera rotation" loading="lazy">
+              <figcaption><strong>First-person camera look.</strong> Mouse input rotates the camera and player, and the vertical angle is clamped so the player cannot look unnaturally straight up or down.</figcaption>
+            </figure>
+
+            <figure>
+              <img src="Horror Game/Schermafbeelding 2026-06-22 234213.png" alt="Background music singleton setup that keeps music playing between scenes" loading="lazy">
+              <figcaption><strong>Persistent background music.</strong> The singleton prevents duplicate music managers, keeps the music object alive between scenes, and starts playback if it is not already playing.</figcaption>
+            </figure>
+
+            <figure>
+              <img src="Horror Game/Schermafbeelding 2026-06-22 234319.png" alt="Footstep audio settings linking player movement to footstep and jump sound clips" loading="lazy">
+              <figcaption><strong>Footstep and movement audio.</strong> The component connects to player movement and assigns audio clips and pitch values for walking, sprinting, and crouching sounds.</figcaption>
+            </figure>
+
+            <figure>
+              <img src="Horror Game/Schermafbeelding 2026-06-22 234415.png" alt="C sharp event subscription that plays jump audio when movement reports a jump" loading="lazy">
+              <figcaption><strong>Jump sound event.</strong> The audio component subscribes to the movement system's jump event when enabled and unsubscribes when disabled, preventing duplicate callbacks.</figcaption>
+            </figure>
+
+            <figure>
+              <img src="Horror Game/Schermafbeelding 2026-06-22 234538.png" alt="C sharp light switch interaction using a camera raycast and object tag check" loading="lazy">
+              <figcaption><strong>Interactive light switch.</strong> When the player clicks, a ray is cast from the camera. If it hits an object tagged as a light switch within range, the lights are toggled.</figcaption>
+            </figure>
+
+            <figure>
+              <img src="Horror Game/Schermafbeelding 2026-06-22 234719.png" alt="C sharp audio box interaction that toggles audio playback when clicked" loading="lazy">
+              <figcaption><strong>Interactive audio box.</strong> Clicking the object stops its sound if it is playing, or starts playback if it is stopped.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <div class="project-overview-links">
+          <a href="https://github.com/charroo-van-megen/horror-game-periode-4"
+            target="_blank" rel="noopener noreferrer" class="external-link">
+            Project repository →
+          </a>
+          <a href="https://github.com/charroo-van-megen/horror-game-periode-4/tree/main/Assets/Scripts"
+            target="_blank" rel="noopener noreferrer" class="external-link">
+            My scripts →
+          </a>
+        </div>
+      </div>
 
     </div>
 
   </section>
 
 </div>
+
+<dialog class="image-viewer" id="imageViewer" aria-labelledby="imageViewerCaption">
+  <button class="image-viewer-close" type="button" aria-label="Close enlarged image">Close</button>
+  <figure>
+    <img alt="">
+    <figcaption id="imageViewerCaption"></figcaption>
+  </figure>
+</dialog>
 
 
 <!-- MODAL -->
@@ -341,7 +880,126 @@ const confirmBtn = modal.querySelector('.confirm');
 
 const cancelBtn = modal.querySelector('.cancel');
 
+const imageViewer = document.getElementById('imageViewer');
+
+const imageViewerImage = imageViewer.querySelector('img');
+
+const imageViewerCaption = imageViewer.querySelector('figcaption');
+
+const imageViewerClose = imageViewer.querySelector('.image-viewer-close');
+
 let targetUrl = '';
+
+let projectTrigger = null;
+
+document.querySelectorAll('.project-image-gallery img').forEach(image => {
+  image.tabIndex = 0;
+  image.setAttribute('role', 'button');
+  image.setAttribute('aria-label', `View larger image: ${image.alt}`);
+  image.title = 'Select to view larger';
+
+  function showLargerImage() {
+    const figure = image.closest('figure');
+    const caption = figure.querySelector('figcaption');
+
+    imageViewerImage.src = image.currentSrc || image.src;
+    imageViewerImage.alt = image.alt;
+    imageViewerCaption.textContent = caption ? caption.textContent : image.alt;
+    imageViewer.showModal();
+    imageViewerClose.focus();
+  }
+
+  image.addEventListener('click', showLargerImage);
+  image.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      showLargerImage();
+    }
+  });
+});
+
+imageViewerClose.addEventListener('click', () => imageViewer.close());
+
+imageViewer.addEventListener('click', event => {
+  if (event.target === imageViewer) {
+    imageViewer.close();
+  }
+});
+
+imageViewer.addEventListener('close', () => {
+  imageViewerImage.removeAttribute('src');
+});
+
+function closeProjectView() {
+
+  const project = document.querySelector('.project-card.is-open');
+
+  if (!project) {
+    return;
+  }
+
+  const toggle = project.querySelector('.project-toggle');
+  const details = document.getElementById(toggle.getAttribute('aria-controls'));
+
+  project.classList.remove('is-open');
+  project.removeAttribute('role');
+  project.removeAttribute('aria-modal');
+  project.removeAttribute('aria-labelledby');
+  document.body.classList.remove('project-open');
+  toggle.setAttribute('aria-expanded', 'false');
+  details.hidden = true;
+
+  if (projectTrigger) {
+    projectTrigger.focus();
+    projectTrigger = null;
+  }
+
+}
+
+document.querySelectorAll('.project-toggle').forEach(button => {
+
+  button.addEventListener('click', () => {
+
+    const project = button.closest('.project-card');
+    const details = document.getElementById(button.getAttribute('aria-controls'));
+    const heading = button.closest('.project-heading');
+
+    projectTrigger = button;
+    project.classList.add('is-open');
+    project.setAttribute('role', 'dialog');
+    project.setAttribute('aria-modal', 'true');
+    project.setAttribute('aria-labelledby', heading.id);
+    document.body.classList.add('project-open');
+    button.setAttribute('aria-expanded', 'true');
+    details.hidden = false;
+    project.querySelector('.project-close').focus();
+
+  });
+
+});
+
+document.querySelectorAll('.project-close').forEach(button => {
+  button.addEventListener('click', closeProjectView);
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Escape') {
+    return;
+  }
+
+  if (imageViewer.open) {
+    imageViewer.close();
+    return;
+  }
+
+  closeProjectView();
+});
+
+document.addEventListener('click', event => {
+  if (document.body.classList.contains('project-open') && event.target === document.body) {
+    closeProjectView();
+  }
+});
 
 document.querySelectorAll('.external-link').forEach(link => {
 
