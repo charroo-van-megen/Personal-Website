@@ -25,11 +25,6 @@
       <a href="index.html" aria-current="page">Home</a>
       <a href="projects.html">Projects</a>
       <a href="about.html">About Me</a>
-      <select id="languageSelect" aria-label="Select language">
-        <option value="nl">NL</option>
-        <option value="en">EN</option>
-        <option value="es">ES</option>
-      </select>
     </div>
   </nav>
 </header>
@@ -65,7 +60,7 @@
         <video class="project-preview-media"
           poster="Eindpresentatie_Team8_Bo_verticalSlice.png"
           aria-label="Gameplay preview of the Untitled Goose Game vertical slice"
-          autoplay controls muted loop playsinline preload="none">
+          autoplay controls muted loop playsinline preload="metadata">
           <source src="0128.mp4" type="video/mp4">
           <source src="0128.webm" type="video/webm">
         </video>
@@ -80,7 +75,7 @@
         <video class="project-preview-media"
           poster="Schermafbeelding 2026-06-22 233540.png"
           aria-label="Gameplay preview of the horror game"
-          autoplay controls muted loop playsinline preload="none">
+          autoplay controls muted loop playsinline preload="metadata">
           <source src="school-horror.mp4" type="video/mp4">
           <source src="school-horror.webm" type="video/webm">
         </video>
@@ -93,23 +88,6 @@
     </div>
   </section>
 </main>
-
-<script>
-  const projectVideos = document.querySelectorAll('.project-preview-card video');
-
-  if ('IntersectionObserver' in window) {
-    const videoObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.play().catch(() => {});
-          videoObserver.unobserve(entry.target);
-        }
-      });
-    });
-
-    projectVideos.forEach(video => videoObserver.observe(video));
-  }
-</script>
 
 <footer>
   <p>© 2026 Charroo van Megen</p>
