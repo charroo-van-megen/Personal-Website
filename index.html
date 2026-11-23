@@ -1,212 +1,118 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title data-i18n="page_home_title">Home</title>
-
-  <!-- Font -->
+  <title>Charroo van Megen | Game Developer</title>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
-
 <header>
+  <nav class="contact-bar" aria-label="Contact links">
+    <a href="mailto:charroovanmegen01@gmail.com">charroovanmegen01@gmail.com</a>
+    <a href="https://github.com/charroo-van-megen" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://discord.com/users/kashikoi1478" target="_blank" rel="noopener noreferrer">Discord</a>
+    <a href="https://www.instagram.com/C.W.van.Megen" target="_blank" rel="noopener noreferrer">Instagram</a>
+  </nav>
 
-  <nav class="navbar">
-
+  <nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <a href="index.html">Charroo van Megen</a>
     </div>
-
     <div class="nav-links">
-
-      <a href="index.html" aria-current="page">
-        Home
-      </a>
-
-      <a href="projects.html">
-        Projects
-      </a>
-
-      <a href="about.html">
-        About Me
-      </a>
-
-      <!-- PERSONAL PAGE LINK -->
-      <a href="Personal.html">
-        Hobbies
-      </a>
-
-      <a href="contact.html">
-        Contact
-      </a>
-
-      <select id="languageSelect">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About Me</a>
+      <select id="languageSelect" aria-label="Select language">
         <option value="nl">NL</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
       </select>
-
     </div>
-
   </nav>
-
 </header>
 
-
-<div class="container">
-
-  <!-- INTRO -->
-
-  <section class="home-intro">
-
+<main class="container">
+  <section class="home-intro" aria-labelledby="welcome-title">
     <div class="home-intro-text">
-      <h1>
-        Welcome to My Website
-      </h1>
-
-      <p>
-        On this website, I showcase my work as a Game Developer,
-        my skills, and my passion for gameplay design.
-      </p>
+      <h1 id="welcome-title">Welcome to My Website</h1>
+      <p>I’m Charroo, a 21-year-old Game Developer student at Mediacollege Amsterdam. I focus on gameplay design, using Unity and C# to create intuitive and engaging player experiences.</p>
     </div>
 
-    <img
-      class="home-profile-image"
-      src="IMG_3544.jpg"
-      alt="Portrait of Charroo van Megen">
-
+    <img class="home-profile-image" src="IMG_3544.jpg" alt="Portrait of Charroo van Megen">
   </section>
 
+  <section class="project-showcase" aria-labelledby="projects-title">
+    <div class="project-showcase-heading">
+      <h2 id="projects-title">My Projects</h2>
+      <p>Scroll through a selection of my game development work, from gameplay systems to atmospheric experiences.</p>
+    </div>
 
-  <!-- ABOUT SECTION -->
+    <div class="project-preview-grid">
+      <article class="project-preview-card">
+        <img class="project-preview-media" src="Bezig met opnemen 2026-10-29 112503.gif"
+          alt="Animated gameplay preview of Galactic Ricochet" loading="lazy">
+        <div class="project-preview-content">
+          <h2>Galactic Ricochet</h2>
+          <p>A fast-paced game where I worked on combo rewards and the Super Ball power-up.</p>
+          <a href="projects.html#galactic-heading">Explore project →</a>
+        </div>
+      </article>
 
-  <section class="home-about">
+      <article class="project-preview-card">
+        <video class="project-preview-media"
+          poster="Eindpresentatie_Team8_Bo_verticalSlice.png"
+          aria-label="Gameplay preview of the Untitled Goose Game vertical slice"
+          autoplay controls muted loop playsinline preload="none">
+          <source src="0128.mp4" type="video/mp4">
+          <source src="0128.webm" type="video/webm">
+        </video>
+        <div class="project-preview-content">
+          <h2>Untitled Goose Game Vertical Slice</h2>
+          <p>A small, complete gameplay experience featuring interactions and AI behavior.</p>
+          <a href="projects.html#vertical-slice-heading">Explore project →</a>
+        </div>
+      </article>
 
-    <h2>
-      About Me
-    </h2>
-
-    <p>
-      Hi, I’m Charroo van Megen, a 21-year-old
-      Game Developer student at Mediacollege Amsterdam.
-
-      I specialize in gameplay design using Unity and C#.
-      I focus on creating intuitive and engaging player experiences
-      and continuously improve through projects and experimentation.
-    </p>
-
+      <article class="project-preview-card">
+        <video class="project-preview-media"
+          poster="Schermafbeelding 2026-06-22 233540.png"
+          aria-label="Gameplay preview of the horror game"
+          autoplay controls muted loop playsinline preload="none">
+          <source src="school-horror.mp4" type="video/mp4">
+          <source src="school-horror.webm" type="video/webm">
+        </video>
+        <div class="project-preview-content">
+          <h2>Horror Game</h2>
+          <p>An atmospheric horror project focused on movement, hiding, audio, and tension.</p>
+          <a href="projects.html#horror-heading">Explore project →</a>
+        </div>
+      </article>
+    </div>
   </section>
+</main>
 
+<script>
+  const projectVideos = document.querySelectorAll('.project-preview-card video');
 
-  <!-- HOME CARDS -->
+  if ('IntersectionObserver' in window) {
+    const videoObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.play().catch(() => {});
+          videoObserver.unobserve(entry.target);
+        }
+      });
+    });
 
-  <section class="home-sections">
-
-    <!-- ABOUT -->
-
-    <div class="home-card">
-
-      <h2>
-        About Me
-      </h2>
-
-      <p>
-        Learn more about who I am and my journey as a developer.
-      </p>
-
-      <a href="about.html">
-
-        Read more →
-
-      </a>
-
-    </div>
-
-
-    <!-- PROJECTS -->
-
-    <div class="home-card">
-
-      <h2>
-        Projects
-      </h2>
-
-      <p>
-        Explore my gameplay prototypes and development work.
-      </p>
-
-      <a href="projects.html">
-
-        View projects →
-
-      </a>
-
-    </div>
-
-
-    <!-- PERSONAL / HOBBIES -->
-
-    <div class="home-card">
-
-      <h2>
-        Hobbies & Writing
-      </h2>
-
-      <p>
-        Discover my creative hobbies, personal interests,
-        and the novels I write outside of game development.
-      </p>
-
-      <a href="Personal.html">
-
-        Explore hobbies →
-
-      </a>
-
-    </div>
-
-
-    <!-- CONTACT -->
-
-    <div class="home-card">
-
-      <h2>
-        Contact
-      </h2>
-
-      <p>
-        Get in touch for collaboration or questions.
-      </p>
-
-      <a href="contact.html">
-
-        Get in touch →
-
-      </a>
-
-    </div>
-
-  </section>
-
-</div>
-
+    projectVideos.forEach(video => videoObserver.observe(video));
+  }
+</script>
 
 <footer>
-
-  <p>
-    © 2026 Charroo van Megen
-  </p>
-
+  <p>© 2026 Charroo van Megen</p>
 </footer>
-
-
 </body>
 </html>

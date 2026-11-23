@@ -420,6 +420,12 @@
 <body>
 
 <header>
+  <nav class="contact-bar" aria-label="Contact links">
+    <a href="mailto:charroovanmegen01@gmail.com">charroovanmegen01@gmail.com</a>
+    <a href="https://github.com/charroo-van-megen" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://discord.com/users/kashikoi1478" target="_blank" rel="noopener noreferrer">Discord</a>
+    <a href="https://www.instagram.com/C.W.van.Megen" target="_blank" rel="noopener noreferrer">Instagram</a>
+  </nav>
 
   <nav class="navbar">
 
@@ -439,14 +445,6 @@
 
       <a href="about.html" data-i18n="nav_about">
         About Me
-      </a>
-
-      <a href="Personal.html">
-        Hobbies
-      </a>
-
-      <a href="contact.html" data-i18n="nav_contact">
-        Contact
       </a>
 
       <select id="languageSelect" onchange="setLanguage(this.value)">
@@ -488,7 +486,7 @@
 
     <!-- PROJECT 1 -->
 
-    <div class="home-card project-card">
+    <div class="home-card project-card" id="galactic-project">
 
       <h2 class="project-heading" id="galactic-heading">
         <button class="project-toggle" type="button" aria-expanded="false" aria-controls="galactic-details">
@@ -590,6 +588,7 @@
       <video class="project-video" controls preload="metadata">
 
         <source src="0128.mp4" type="video/mp4">
+        <source src="0128.webm" type="video/webm">
 
         Your browser does not support the video tag.
 
@@ -678,6 +677,7 @@
             <figure>
               <video controls preload="metadata">
                 <source src="Schermopname 2026-01-20 210459.mp4" type="video/mp4">
+                <source src="Schermopname 2026-01-20 210459.webm" type="video/webm">
                 Your browser does not support the video tag.
               </video>
               <figcaption>Gameplay recording · January 20</figcaption>
@@ -686,6 +686,7 @@
             <figure>
               <video controls preload="metadata">
                 <source src="Schermopname 2026-01-20 211010.mp4" type="video/mp4">
+                <source src="Schermopname 2026-01-20 211010.webm" type="video/webm">
                 Your browser does not support the video tag.
               </video>
               <figcaption>Gameplay recording · January 20</figcaption>
@@ -694,6 +695,7 @@
             <figure>
               <video controls preload="metadata">
                 <source src="Schermopname 2026-01-21 092406.mp4" type="video/mp4">
+                <source src="Schermopname 2026-01-21 092406.webm" type="video/webm">
                 Your browser does not support the video tag.
               </video>
               <figcaption>Gameplay recording · January 21</figcaption>
@@ -718,7 +720,7 @@
 
     <!-- PROJECT 3 -->
 
-    <div class="home-card project-card">
+    <div class="home-card project-card" id="horror-project">
 
       <h2 class="project-heading" id="horror-heading">
         <button class="project-toggle" type="button" aria-expanded="false" aria-controls="horror-details">
@@ -730,7 +732,9 @@
 
       <video class="project-video" controls preload="metadata">
 
-        <source src="school-horror.mov">
+        <source src="school-horror.mp4" type="video/mp4">
+        <source src="school-horror.webm" type="video/webm">
+        <source src="school-horror.mov" type="video/quicktime">
 
         Your browser does not support the video tag.
 
@@ -977,6 +981,14 @@ document.querySelectorAll('.project-toggle').forEach(button => {
   });
 
 });
+
+const projectHeading = location.hash
+  ? document.getElementById(decodeURIComponent(location.hash.slice(1)))
+  : null;
+
+if (projectHeading && projectHeading.classList.contains('project-heading')) {
+  projectHeading.querySelector('.project-toggle').click();
+}
 
 document.querySelectorAll('.project-close').forEach(button => {
   button.addEventListener('click', closeProjectView);

@@ -1,127 +1,72 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="page_about_title">About Me</title>
+  <title>About Me | Charroo van Megen</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-
 <header>
-  <nav class="navbar">
+  <nav class="contact-bar" aria-label="Contact links">
+    <a href="mailto:charroovanmegen01@gmail.com">charroovanmegen01@gmail.com</a>
+    <a href="https://github.com/charroo-van-megen" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://discord.com/users/kashikoi1478" target="_blank" rel="noopener noreferrer">Discord</a>
+    <a href="https://www.instagram.com/C.W.van.Megen" target="_blank" rel="noopener noreferrer">Instagram</a>
+  </nav>
 
+  <nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <a href="index.html">Charroo van Megen</a>
     </div>
-
     <div class="nav-links">
-      <a href="index.html" data-i18n="nav_home">Home</a>
-      <a href="projects.html" data-i18n="nav_projects">Projects</a>
-      <a href="about.html" data-i18n="nav_about" aria-current="page">About Me</a>
-      <a href="Personal.html">Hobbies</a>
-      <a href="contact.html" data-i18n="nav_contact">Contact</a>
-
-      <select id="languageSelect" onchange="setLanguage(this.value)">
-        <option value="nl">NL</option>
-        <option value="en">EN</option>
-        <option value="es">ES</option>
-      </select>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html" aria-current="page">About Me</a>
     </div>
-
   </nav>
 </header>
 
-<div class="container">
-
-  <!-- Header -->
+<main class="container">
   <section class="about-header">
-    <h1 data-i18n="about_title">About Me</h1>
-    <p class="intro" data-i18n="about_subtitle">
-      Game Developer • Unity • C#
-    </p>
+    <h1>About Me</h1>
+    <p class="intro">Game Developer • Unity • C#</p>
   </section>
 
-  <!-- Introduction -->
   <section class="about-section">
-    <h2 data-i18n="about_intro_title">Introduction</h2>
-    <p data-i18n="about_intro">
-      Hello, my name is Charroo van Megen, I am 21 years old and currently a second-year Game Developer student at Mediacollege Amsterdam.
-      My passion lies in gameplay design, because I believe that well-crafted gameplay is the core of a strong game experience. 
-      It determines how players move, interact with the world, and fully immerse themselves in the game.
-    </p>
+    <h2>Who I Am</h2>
+    <p>I’m Charroo van Megen, a 21-year-old Game Developer student at Mediacollege Amsterdam. I’m especially interested in gameplay design: the way a player moves, interacts with the world, and learns a game’s systems. For me, good gameplay should feel intuitive and responsive, while still giving players interesting things to discover and master.</p>
+    <p>I like to study how mechanics work in games I play, then use what I learn when building my own prototypes. I try to understand a problem and find a solution independently, while staying open to feedback and other perspectives.</p>
   </section>
 
-  <!-- Gameplay Philosophy -->
   <section class="about-section">
-    <h2 data-i18n="about_gameplay_title">Gameplay & Design Philosophy</h2>
-    <p data-i18n="about_gameplay_text">
-      I have conducted a lot of research into effective gameplay mechanics and studied best practices from other developers 
-      to understand what makes a game feel good to the player. I aim to make gameplay both intuitive and accessible.
-    </p>
+    <h2>Skills & Projects</h2>
+    <p>I work primarily with Unity and C#. Across team and personal projects, I’ve explored gameplay programming, player interactions, movement, audio, and reward systems. Projects such as a horror game and a vertical slice inspired by <em>Untitled Goose Game</em> have given me opportunities to turn ideas into playable experiences.</p>
+    <p>Working with others has helped me develop my communication and teamwork skills. I’m familiar with Scrum, value constructive feedback, and aim to explain my ideas clearly. I’m also interested in learning more about C++ and Unreal Engine.</p>
   </section>
 
-  <!-- Programming -->
-  <section class="about-section">
-    <h2 data-i18n="about_programming_title">Programming & Tools</h2>
-    <p data-i18n="about_programming_text">
-      In terms of programming, I have experience with C# and the Unity engine. I enjoy working independently on new code 
-      and try to find solutions myself before turning to tutorials. In the future, I want to expand my skills to C++ and Unreal Engine.
-    </p>
-  </section>
-
-  <!-- Projects -->
-  <section class="about-section">
-    <h2 data-i18n="about_projects_title">Projects</h2>
-    <p data-i18n="about_projects_text">
-      My experience includes three projects: a Tower Defense game, a vertical slice based on Untitled Goose Game, 
-      and my Myth project at the end of my first year.
-    </p>
-  </section>
-
-  <!-- Skills -->
-  <section class="about-section">
-    <h2 data-i18n="about_skills_title">Skills & Qualities</h2>
-    <p data-i18n="about_skills_text">
-      Creativity, discipline, customer focus, and teamwork. I have strong communication skills, am familiar with Scrum, and have learned to handle feedback and explain ideas clearly to others through writing and other creative work.
-    </p>
-  </section>
-
-  <!-- Interests -->
-  <section class="about-section">
-    <h2 data-i18n="about_interests_title">Interests</h2>
-    <p data-i18n="about_interests_text">
-      Outside of my studies, I enjoy hobbies such as sports, reading, writing, and gaming. Writing and other creative hobbies have helped me handle feedback, explain ideas to others, and develop my storytelling and writing skills.
-    </p>
-  </section>
-
-  <!-- 🔽 NEW: Hobby (Collapsible) -->
-  <section class="about-section">
-    <h2 class="collapsible" onclick="toggleSection(this)">
-      <span data-i18n="about_hobby_title">Hobby</span>
-    </h2>
-    <p class="collapsible-content" data-i18n="about_hobby_text">
-      In my free time, I enjoy exploring game mechanics, experimenting with small prototypes, 
-      and analyzing why certain games feel satisfying to play. I also like sports, reading, 
-      and creative writing, which help me think more deeply about player experience and storytelling. Writing has also taught me to work with feedback and communicate ideas clearly.
-    </p>
-  </section>
-
-  <!-- Goals -->
   <section class="about-section about-goal">
-    <h2 data-i18n="about_goals_title">Future Goals</h2>
-    <p data-i18n="about_goals">
-      I am a down-to-earth and driven person and aim to further expand my knowledge of Unity, C#, and gameplay mechanics. 
-      My ultimate goal is to develop my own dream game.
-    </p>
+    <h2>Outside of Development</h2>
+    <p>Outside of game development, I enjoy gaming, sports, reading fantasy and mythology, and creative writing. Writing gives me a chance to explore characters, worlds, and story ideas in more depth; reading and playing games inspire me with new approaches to atmosphere and storytelling. Sports also help me practise consistency and discipline.</p>
+    <div class="novel-preview">
+      <img src="covGREENTEXT.png" alt="Cover of Unmade" loading="lazy">
+      <div>
+        <h3>Unmade</h3>
+        <p>My progression fantasy story follows a character facing memory loss and supernatural trials while searching for their identity.</p>
+        <a href="https://www.royalroad.com/fiction/140196/unmade" target="_blank" rel="noopener noreferrer">Read Unmade →</a>
+      </div>
+    </div>
   </section>
 
-</div>
+  <section class="about-section">
+    <h2>What I’m Working Toward</h2>
+    <p>I want to keep growing as a developer by improving my knowledge of Unity, C#, and gameplay systems. In the long term, my goal is to create my own dream game: one with thoughtful mechanics and an experience that stays with its players.</p>
+  </section>
+</main>
 
 <footer>
-  <p data-i18n="footer">© 2026 Charroo van Megen</p>
+  <p>© 2026 Charroo van Megen</p>
 </footer>
-
-<script src="script.js"></script>
 </body>
 </html>
